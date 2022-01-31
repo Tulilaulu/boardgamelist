@@ -7,5 +7,5 @@
   "database": "",
   "synchronize": false,
   "logging": true,
-  "entities": ["src/**/*.entity.tasdfs", "dist/**/*.entity.js"]
+  "entities": ["dist/**/*.entity.js"]
 }
