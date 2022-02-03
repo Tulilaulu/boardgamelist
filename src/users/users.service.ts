@@ -18,7 +18,7 @@
 
       async create(data: UsersDTO) {
         const user = this.usersRepository.create(data);
-        await this.usersRepository.save(data);
+        await this.usersRepository.save(user);
         return user;
       }
 
