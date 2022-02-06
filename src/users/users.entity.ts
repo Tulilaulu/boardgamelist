@@ -1,7 +1,8 @@
-import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, BeforeUpdate } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, BeforeUpdate, OneToMany, BaseEntity } from 'typeorm';
 import * as crypto from 'crypto';
+import GameEntity from '../games/games.entity';
 @Entity('users')
-export class UsersEntity {
+export default class UsersEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -10,6 +11,9 @@ export class UsersEntity {
 
   @Column()
   email: string;
+
+  @OneToMany( type => GameEntity, game => game.user)
+  games: GameEntity[];
 
   @BeforeInsert()
   @BeforeUpdate()

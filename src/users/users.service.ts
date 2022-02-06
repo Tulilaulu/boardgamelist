@@ -1,8 +1,8 @@
  import { Injectable, HttpStatus } from '@nestjs/common';
     import { InjectRepository } from '@nestjs/typeorm';
     import { Repository } from 'typeorm';
-
-    import { UsersEntity } from './users.entity';
+    import GameEntity from '../games/games.entity';
+    import UsersEntity from './users.entity';
     import { UsersDTO } from './users.dto';
 
     @Injectable()
@@ -48,6 +48,13 @@
 
       async destroy(id: number) {
         await this.usersRepository.delete({ id });
-        return { deleted: true };
+        return { deleted: true };	
       }
+    
+      async getGamesOfUser(userID: number): Promise<GameEntity[]> {
+    	console.log(typeof(userID));
+        const user: UsersEntity = await UsersEntity.findOne({where: {id: userID}, relations: ['games']});
+	return user.games;
+      }
+
     }
